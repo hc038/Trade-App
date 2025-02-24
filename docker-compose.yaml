@@ -1,0 +1,7 @@
+version: '3'
+services:
+  ecommerse:
+    image: trade-app:v4.0
+    container_name: trade-app
+    ports:
+      - '8000:8000'
