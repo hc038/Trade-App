@@ -47,7 +47,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: Hemchandswarna/Trade-App:latest
+        tags: hemchandswarna/trade-app:latest
 
     - name: Deploy to Production
       run: echo "Deploy your application"
