@@ -62,5 +62,4 @@ jobs:
           docker pull hemchandswarna/trade-app:latest
           docker stop myapp || true
           docker run --rm -d --name myapp -p 8000:8000 hemchandswarna/trade-app:latest
-          # Add additional commands here
         EOF
