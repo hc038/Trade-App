@@ -49,6 +49,18 @@ jobs:
         push: true
         tags: hemchandswarna/trade-app:latest
 
-    - name: Deploy to Production
-      run: echo "Deploy your application"
-      # Add your deployment script in place of echo
+    - name: Install SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+    - name: SSH and Deploy Docker Container on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.HOST }} << 'EOF'
+          docker pull hemchandswarna/trade-app:latest
+          docker stop myapp || true
+          docker run --rm -d --name myapp hemchandswarna/trade-app:latest
+          # Add additional commands here
+        EOF
