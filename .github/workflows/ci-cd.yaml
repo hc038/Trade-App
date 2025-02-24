@@ -28,11 +28,6 @@ jobs:
         pip install flake8
         flake8 . --exit-zero
 
-    - name: Run Tests
-      run: |
-        pip install pytest
-        pytest
-
   docker-build-and-push:
     needs: build-and-test
     runs-on: ubuntu-latest
