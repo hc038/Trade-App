@@ -61,6 +61,6 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.HOST }} << 'EOF'
           docker pull hemchandswarna/trade-app:latest
           docker stop myapp || true
-          docker run --rm -d --name myapp hemchandswarna/trade-app:latest
+          docker run --rm -d --name myapp -p 8000:8000 hemchandswarna/trade-app:latest
           # Add additional commands here
         EOF
